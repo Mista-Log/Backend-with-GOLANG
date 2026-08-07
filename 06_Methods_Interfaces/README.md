@@ -6,7 +6,7 @@
    and receivers, interfaces (implicit/structural satisfaction — no
    `implements` keyword), composition, embedding for shared behavior, type
    assertions, the empty interface (`any`), and reflection basics — with a
-   reminder that reflection should stay rare in everyday code. Diagrams
+   reminder that reflection should stay rare in everyday code.
    included throughout.
 
 2. **[payment-gateway/](./payment-gateway)** — A `Gateway` that processes
