@@ -1,0 +1,52 @@
+// order.proto — a genuine Protocol Buffers definition for a SYNCHRONOUS,
+// gRPC interface to Order Service, alongside its event-driven interface
+// (internal/orderservice) and its REST interface (also
+// internal/orderservice, via NewHTTPHandler). Real services commonly
+// expose more than one interface shape like this: REST/gRPC for direct
+// synchronous calls, events for everything that can happen asynchronously.
+//
+// This file is NOT wired into the running demo — generating Go code from
+// it requires the protoc compiler plus its Go plugins, an extra local
+// install step beyond `go mod tidy` (see this project's README). It's
+// included so the Protocol Buffers / gRPC sections of the guide have a
+// real, correct, buildable artifact to point at, not just guide snippets.
+
+syntax = "proto3";
+
+package order;
+
+option go_package = "microservicesdemo/proto/orderpb";
+
+message Order {
+  int32 id = 1;
+  string item = 2;
+  double amount = 3;
+  string status = 4;
+}
+
+message GetOrderRequest {
+  int32 id = 1;
+}
+
+message CreateOrderRequest {
+  string item = 1;
+  double amount = 2;
+}
+
+message ListOrdersRequest {}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+}
+
+// OrderService mirrors internal/orderservice's REST endpoints as UNARY
+// RPCs (guide's "four call shapes" section) — a straightforward starting
+// point. StreamOrderUpdates below is the more interesting one: SERVER
+// STREAMING, letting a client watch an order's status change over time
+// (pending -> paid, or pending -> payment_failed) without polling.
+service OrderService {
+  rpc GetOrder(GetOrderRequest) returns (Order);
+  rpc CreateOrder(CreateOrderRequest) returns (Order);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+  rpc StreamOrderUpdates(GetOrderRequest) returns (stream Order);
+}
