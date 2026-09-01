@@ -27,11 +27,6 @@
    shows exactly how the architecture makes the service testable without a
    server or database in the loop.
 
-## Suggested Order
-
-```
-Production Go guide ──▶ production-service (reference architecture)
-```
 
 ## Suggested Order
 
