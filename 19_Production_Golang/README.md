@@ -34,6 +34,13 @@
 Production Go guide ──▶ production-service (reference architecture)
 ```
 
+## Suggested Order
+
+```
+Production Go guide ──▶ production-service (reference architecture)
+```
+
+
 This module has no numbered projects — its topics are structural habits,
 not algorithms to implement from scratch. The reference project exists to
 make those habits concrete and copyable, not to be "completed" like earlier
