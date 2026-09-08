@@ -43,15 +43,6 @@ go run ./cmd/demo
 go test ./...
 ```
 
-## Setup
-
-```bash
-cd fintech-backend
-go run ./cmd/demo
-go test ./...
-```
-
-
 No external dependencies — pure standard library, so this runs immediately
 with no setup step at all.
 
