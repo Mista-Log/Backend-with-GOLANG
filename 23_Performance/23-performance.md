@@ -99,15 +99,6 @@ many samples, functions where the program spends more time appear more
 often. This is why very short-running programs produce noisy, unreliable
 CPU profiles: too few samples to be statistically meaningful.
 
-## CPU Profiling
-
-CPU profiles work by **sampling**: the runtime interrupts execution
-roughly 100 times per second and records the current call stack — over
-many samples, functions where the program spends more time appear more
-often. This is why very short-running programs produce noisy, unreliable
-CPU profiles: too few samples to be statistically meaningful.
-
-
 ```
 ┌──────────────────────────────────────────────────────────┐
 │   go test -bench=. -cpuprofile=cpu.prof ./...                        │
