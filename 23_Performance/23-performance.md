@@ -15,6 +15,15 @@ program *actually* spends time and memory, which is reliably different
 from where you'd guess. Go's `runtime/pprof` and `net/http/pprof` packages
 make this close to zero-setup.
 
+
+## Profiling
+
+**Never optimize based on intuition alone** — profiling measures where a
+program *actually* spends time and memory, which is reliably different
+from where you'd guess. Go's `runtime/pprof` and `net/http/pprof` packages
+make this close to zero-setup.
+
+
 ```
 ┌──────────────────────────────────────────────────────────┐
 │   Profile types Go supports out of the box:                          │
