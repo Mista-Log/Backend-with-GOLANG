@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudapp
+  labels:
+    app: cloudapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cloudapp
+  template:
+    metadata:
+      labels:
+        app: cloudapp
+    spec:
+      containers:
+        - name: cloudapp
+          image: cloudapp:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8080
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudapp
+spec:
+  selector:
+    app: cloudapp
+  ports:
+    - port: 80
+      targetPort: 8080

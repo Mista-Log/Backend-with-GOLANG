@@ -1,0 +1,31 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+      - run: go build ./...
+        working-directory: app
+      - run: go vet ./...
+        working-directory: app
+      - run: go test -race ./...
+        working-directory: app
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t cloudapp:${{ github.sha }} ./app
+      # A real pipeline would push to a registry (ECR/GCR/Docker Hub) here,
+      # then update the Kubernetes Deployment's image, e.g.:
+      #   kubectl set image deployment/cloudapp cloudapp=cloudapp:${{ github.sha }}
