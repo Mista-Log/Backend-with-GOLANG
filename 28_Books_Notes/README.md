@@ -65,3 +65,14 @@ performance, cloud deployment, system design, interview preparation, and
 now a system for keeping everything you learn after this.
 
 The modules are finished. The notes folder isn't meant to be.
+
+
+## This Is the End of the Course
+
+Twenty-nine modules, 00 through 28 — from `go version` through
+fundamentals, concurrency, HTTP, databases, authentication,
+microservices, distributed systems, a complete fintech backend,
+performance, cloud deployment, system design, interview preparation, and
+now a system for keeping everything you learn after this.
+
+The modules are finished. The notes folder isn't meant to be.
