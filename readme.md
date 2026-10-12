@@ -79,13 +79,3 @@ Start with fundamentals (00-05) and progressively build toward advanced topics a
 3. Move to **10-19** for practical backend skills.
 4. Explore **20-26** for advanced system design and architecture.
 
-## 🎯 Learning Path
-
-Start with fundamentals (00-05) and progressively build toward advanced topics and production systems.
-
-## 🚀 Quick Start
-
-1. Begin with **00_Setup_And_Tools** for environment configuration.
-2. Progress through **01-09** for core language concepts.
-3. Move to **10-19** for practical backend skills.
-4. Explore **20-26** for advanced system design and architecture.
