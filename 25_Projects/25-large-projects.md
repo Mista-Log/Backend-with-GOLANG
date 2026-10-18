@@ -347,3 +347,51 @@ Every connected client is naturally its own goroutine (Module 12) reading
 its own connection in a loop — the hard part, solved in `chat-server/`
 below, is safely **broadcasting** one message out to every OTHER
 connected client's goroutine at once.
+
+
+
+
+## WebSockets — the One Genuinely New Piece
+
+Everything above leans on patterns this course already covered, except
+**Chat Server**'s transport. A WebSocket is a **persistent, full-duplex**
+connection — unlike a normal HTTP request/response, either side can send a
+message to the other **at any time**, without polling.
+
+```
+┌──────────────────────────────────────────────────────────┐
+│   Normal HTTP:        client asks → server answers → connection CLOSES     │
+│                          (need a NEW request for every new piece of info)       │
+│                                                                                     │
+│   WebSocket:            client and server UPGRADE one HTTP connection into           │
+│                            a persistent, bidirectional pipe — EITHER side can           │
+│                            send a message at ANY time, no new request needed               │
+└──────────────────────────────────────────────────────────┘
+```
+
+```go
+import "github.com/gorilla/websocket"
+
+var upgrader = websocket.Upgrader{}
+
+func handleWS(w http.ResponseWriter, r *http.Request) {
+	conn, err := upgrader.Upgrade(w, r, nil) // the ONE HTTP request that starts the connection
+	if err != nil {
+		return
+	}
+	defer conn.Close()
+
+	for {
+		_, message, err := conn.ReadMessage() // blocks until the CLIENT sends something
+		if err != nil {
+			break // connection closed
+		}
+		conn.WriteMessage(websocket.TextMessage, message) // send something back, any time
+	}
+}
+```
+
+Every connected client is naturally its own goroutine (Module 12) reading
+its own connection in a loop — the hard part, solved in `chat-server/`
+below, is safely **broadcasting** one message out to every OTHER
+connected client's goroutine at once.
