@@ -47,9 +47,3 @@ This is the last module in the course. Every topic from `go version` in
 Module 00 through this roadmap has been building toward exactly this: the
 ability to look at an unfamiliar, real-world system and know which pieces
 you already know how to build.
-
-
-This is the last module in the course. Every topic from `go version` in
-Module 00 through this roadmap has been building toward exactly this: the
-ability to look at an unfamiliar, real-world system and know which pieces
-you already know how to build.
